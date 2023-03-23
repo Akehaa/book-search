@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply h-screen bg-gradient-to-b from-[#0c0d1b] via-[#12152b] to-[#0c0d1b]
+  }
+
+  span, p, input {
+    @apply text-[#dbdff1]
+  }
+}

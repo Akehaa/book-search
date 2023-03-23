@@ -1,5 +1,1 @@
-export default function Home() {
-  return (
-    <h1>henlo warudo!!!</h1>
-  )
-}
+export { default } from './home'
