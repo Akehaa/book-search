@@ -4,10 +4,10 @@
 
 @layer base {
   body {
-    @apply h-screen bg-gradient-to-b from-[#0c0d1b] via-[#12152b] to-[#0c0d1b]
+    @apply min-h-screen bg-gradient-to-b from-[#0c0d1b] via-[#12152b] to-[#0c0d1b] bg-no-repeat
   }
 
-  span, p, input {
+  span, p, input, h1 {
     @apply text-[#dbdff1]
   }
 }
