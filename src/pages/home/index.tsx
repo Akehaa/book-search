@@ -1,14 +1,11 @@
 import { BookCard } from "@/components/BookCard";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { MagnifyingGlass } from "phosphor-react";
 import { useState } from "react";
 
 export default function Home() {
   const [book, setBook] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-
-  const router = useRouter()
+  const [searchResult, setSearchResult] = useState([])
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const book = event.target.value;

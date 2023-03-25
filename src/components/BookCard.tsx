@@ -18,7 +18,7 @@ export function BookCard({ title, author, language, snippet, src }: BookCardProp
         : <Image src={no_cover} width={100} height={150} alt="" title="book cover" className="rounded-lg h-[9rem]" />}
       <div>
         <h1 className="font-bold text-xl line-clamp-1" title="title">{title}</h1>
-        <span className="opacity-70 line-clamp-1" title="author">{author}</span>
+        <span className="opacity-70 line-clamp-1" title="author">{author + " "}</span>
         <div className="flex flex-row  text-xs my-1">
           <span className="outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="language">{language.toUpperCase()}</span>
         </div>
