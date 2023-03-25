@@ -13,6 +13,7 @@ interface BookProps {
     authors: string
     language: string
     description: string
+    categories: string
   }
 }
 
@@ -26,9 +27,7 @@ export default function Home() {
     setBook(book)
   }
 
-  console.log(searchResult)
-
-  function handleSubmit(event: any) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (book) {
@@ -60,6 +59,7 @@ export default function Home() {
             title={book.volumeInfo.title}
             author={book.volumeInfo.authors}
             language={book.volumeInfo.language}
+            categories={book.volumeInfo.categories}
             snippet={book.volumeInfo.description}
           />
         ))}

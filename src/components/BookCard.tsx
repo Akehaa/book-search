@@ -5,11 +5,12 @@ interface BookCardProps {
   title: string
   author: string
   language: string
+  categories: string
   snippet: string
   src: string
 }
 
-export function BookCard({ title, author, language, snippet, src }: BookCardProps) {
+export function BookCard({ title, author, language, categories, snippet, src }: BookCardProps) {
 
   return (
     <div className="flex w-[21rem] lg:w-[24rem] p-3 gap-4 mb-4 bg-[#171c30] rounded-lg">
@@ -21,8 +22,11 @@ export function BookCard({ title, author, language, snippet, src }: BookCardProp
         {author
           ? <span className="opacity-70 line-clamp-1" title="author">{author + " "}</span>
           : <span className="opacity-70" title="author">Author not available.</span>}
-        <div className="flex flex-row  text-xs my-1">
+        <div className="flex flex-row text-xs my-1 gap-2">
           <span className="outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="language">{language.toUpperCase()}</span>
+          {categories
+            ? <span className="outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="categories">{categories}</span>
+            : null}
         </div>
         {snippet
           ? <p className="line-clamp-3 text-sm" title="snippet">{snippet}</p>
