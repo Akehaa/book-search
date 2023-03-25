@@ -3,15 +3,30 @@ import axios from "axios";
 import { MagnifyingGlass } from "phosphor-react";
 import { useState } from "react";
 
+interface BookProps {
+  id: string
+  volumeInfo: {
+    imageLinks: {
+      thumbnail: string
+    }
+    title: string
+    authors: string
+    language: string
+    description: string
+  }
+}
+
 export default function Home() {
   const [book, setBook] = useState("");
-  const [searchResult, setSearchResult] = useState([])
+  const [searchResult, setSearchResult] = useState<Array<BookProps>>([])
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const book = event.target.value;
 
     setBook(book)
   }
+
+  console.log(searchResult)
 
   function handleSubmit(event: any) {
     event.preventDefault()
@@ -38,7 +53,7 @@ export default function Home() {
         </button>
       </form>
       <main className="flex flex-wrap gap-8 justify-center">
-        {searchResult.map(book => (
+        {searchResult?.map(book => (
           <BookCard
             key={book.id}
             src={book.volumeInfo.imageLinks?.thumbnail}
