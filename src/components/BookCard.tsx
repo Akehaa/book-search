@@ -22,7 +22,7 @@ export function BookCard({ title, author, language, categories, snippet, src }: 
         {author
           ? <span className="opacity-70 line-clamp-1" title="author">{author + " "}</span>
           : <span className="opacity-70" title="author">Author not available.</span>}
-        <div className="flex flex-row text-xs my-1 gap-2">
+        <div className="flex flex-row items-start text-xs my-1 gap-2">
           <span className="outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="language">{language.toUpperCase()}</span>
           {categories
             ? <span className="outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="categories">{categories}</span>
