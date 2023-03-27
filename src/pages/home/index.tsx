@@ -40,7 +40,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center ">
-      <form className="mt-32 mb-16 flex" onSubmit={handleSubmit}>
+      <form className="mt-32 mb-20 flex" onSubmit={handleSubmit}>
         <input
           type="text"
           onChange={handleChange}

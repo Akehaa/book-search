@@ -1,5 +1,5 @@
 import Image from "next/image"
-import no_cover from "../../public/no_cover_thumb.png"
+import no_cover from "../assets/no_cover_thumb.png"
 
 interface BookCardProps {
   title: string
@@ -13,11 +13,11 @@ interface BookCardProps {
 export function BookCard({ title, author, language, categories, snippet, src }: BookCardProps) {
 
   return (
-    <div className="flex w-[21rem] lg:w-[24rem] p-3 gap-4 mb-4 bg-[#171c30] rounded-lg">
+    <div className="flex w-[21.5rem] lg:w-[24rem] mb-4 bg-[#171c30] rounded-[0.250rem] shadow-lg shadow-[#090b18]">
       {src
-        ? <Image src={src} width={100} height={150} alt="" title="book cover" className="rounded-lg h-[9rem] w-[auto]" />
-        : <Image src={no_cover} width={100} height={150} alt="" title="book cover" className="rounded-lg h-[9rem] w-[auto]" />}
-      <div>
+        ? <Image src={src} quality={100} width={100} height={150} alt="" title="book cover" className="rounded-l-[0.250rem] h-[10.5rem] min-w-[8rem] " />
+        : <Image src={no_cover} width={100} height={150} alt="" title="book cover not available" className="rounded-l-[0.250rem] h-[10.5rem] min-w-[8rem]" />}
+      <div className="py-2 pl-3 pr-2">
         <h1 className="font-bold text-xl line-clamp-1" title="title">{title}</h1>
         {author
           ? <span className="opacity-70 line-clamp-1" title="author">{author + " "}</span>
@@ -25,7 +25,7 @@ export function BookCard({ title, author, language, categories, snippet, src }: 
         <div className="flex flex-row items-start text-xs my-1 gap-2">
           <span className="outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="language">{language.toUpperCase()}</span>
           {categories
-            ? <span className="outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="categories">{categories}</span>
+            ? <span className="line-clamp-1 outline-1 outline outline-[#8486dd] rounded-md py-1 px-2" title="categories">{categories}</span>
             : null}
         </div>
         {snippet
