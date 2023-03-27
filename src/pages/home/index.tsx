@@ -3,9 +3,23 @@ import axios from "axios";
 import { MagnifyingGlass } from "phosphor-react";
 import { useState } from "react";
 
+interface BookProps {
+  etag: string
+  volumeInfo: {
+    imageLinks: {
+      thumbnail: string
+    }
+    title: string
+    authors: string
+    language: string
+    description: string
+    categories: string
+  }
+}
+
 export default function Home() {
   const [book, setBook] = useState("");
-  const [searchResult, setSearchResult] = useState([])
+  const [searchResult, setSearchResult] = useState<Array<BookProps>>([])
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const book = event.target.value;
@@ -13,7 +27,7 @@ export default function Home() {
     setBook(book)
   }
 
-  function handleSubmit(event: any) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     if (book) {
@@ -24,9 +38,11 @@ export default function Home() {
     }
   }
 
+  console.log(searchResult)
+
   return (
-    <div className="flex flex-col items-center ">
-      <form className="mt-32 mb-16 flex" onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center 2xl:px-4 ">
+      <form className="mt-32 mb-20 flex" onSubmit={handleSubmit}>
         <input
           type="text"
           onChange={handleChange}
@@ -37,14 +53,15 @@ export default function Home() {
           <MagnifyingGlass className="text-[1.6rem] ml-[-2.5rem]" alt="Search" type="submit" />
         </button>
       </form>
-      <main className="flex flex-wrap gap-8 justify-center">
-        {searchResult.map(book => (
+      <main className="flex flex-wrap gap-8 justify-center ">
+        {searchResult?.map(book => (
           <BookCard
-            key={book.id}
+            key={book.etag}
             src={book.volumeInfo.imageLinks?.thumbnail}
             title={book.volumeInfo.title}
             author={book.volumeInfo.authors}
             language={book.volumeInfo.language}
+            categories={book.volumeInfo.categories}
             snippet={book.volumeInfo.description}
           />
         ))}
