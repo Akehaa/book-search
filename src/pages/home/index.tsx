@@ -4,7 +4,7 @@ import { MagnifyingGlass } from "phosphor-react";
 import { useState } from "react";
 
 interface BookProps {
-  id: string
+  etag: string
   volumeInfo: {
     imageLinks: {
       thumbnail: string
@@ -38,8 +38,10 @@ export default function Home() {
     }
   }
 
+  console.log(searchResult)
+
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center 2xl:px-4 ">
       <form className="mt-32 mb-20 flex" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -51,10 +53,10 @@ export default function Home() {
           <MagnifyingGlass className="text-[1.6rem] ml-[-2.5rem]" alt="Search" type="submit" />
         </button>
       </form>
-      <main className="flex flex-wrap gap-8 justify-center">
+      <main className="flex flex-wrap gap-8 justify-center ">
         {searchResult?.map(book => (
           <BookCard
-            key={book.id}
+            key={book.etag}
             src={book.volumeInfo.imageLinks?.thumbnail}
             title={book.volumeInfo.title}
             author={book.volumeInfo.authors}
