@@ -13,7 +13,6 @@ interface BookCardProps {
 }
 
 export function BookCard({ id, title, author, language, categories, snippet, src }: BookCardProps) {
-
   return (
     <div className="flex w-[21.5rem] hover:w-[22.5rem] lg:w-[24rem] lg:hover:w-[25.5rem] mb-4 bg-[#171c30] rounded-[0.250rem] shadow-lg shadow-[#070913] hover:shadow-xl hover:shadow-[#05060a] duration-200">
       <Link
