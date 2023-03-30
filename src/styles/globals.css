@@ -7,7 +7,7 @@
     @apply min-h-screen bg-gradient-to-b from-[#0c0d1b] via-[#181c38] to-[#0c0d1b] bg-no-repeat
   }
 
-  span, p, input, h1 {
+  span, p, input, h1, h2 {
     @apply text-[#dbdff1]
   }
 }
