@@ -1,15 +1,15 @@
 import axios from "axios"
-import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
 import { GetStaticProps } from "next"
 import no_cover from "../../assets/no_cover_thumb.png"
 import { useEffect, useState } from "react"
+import { NextSeo } from "next-seo"
 
 interface BookProps {
   book: {
     src: string
-    title: string
+    title: string | null
     subtitle?: string
     authors?: string
     publisher?: string
@@ -24,35 +24,36 @@ interface BookProps {
 }
 
 export default function Books({ book }: BookProps) {
-  const [isForSale, setIsForSale] = useState(false)
+  const [isForSale, setIsForSale] = useState(true)
   const [isMature, setIsMature] = useState(false)
+  const [title, setTitle] = useState('')
 
   useEffect(() => {
-    if (book.saleability == "FOR_SALE") {
-      setIsForSale(true)
-    } else if (book.saleability == "NOT_FOR_SALE") {
-      setIsForSale(false)
-    } else {
-      setIsForSale(false)
-    }
+    setTitle(`${book.title} | BookSearch`)
 
-    if (book.maturityRating == "MATURE") {
+    if (book.maturityRating == 'MATURE') {
       setIsMature(true)
-    } else if (book.maturityRating == "NOT_MATURE") {
+    } else if (book.maturityRating == 'NOT_MATURE') {
       setIsForSale(false)
-    } else {
-      setIsMature(false)
+    };
+  }, [])
+
+  useEffect(() => {
+    if (book.saleability == 'FOR_SALE') {
+      setIsForSale(true)
+    } else if (book.saleability == 'NOT_FOR_SALE') {
+      setIsForSale(false)
     }
   }, [])
 
   return (
     <>
-      <Head>
-        <title>{book.title}</title>
-      </Head>
+      <NextSeo
+        title={title}
+      />
 
-      <section className="flex flex-col mx-3 my-14 md:w-2/3  xl:w-2/5 2xl:w-[35%] lg:mx-auto rounded-md gap-2 justify-center items-center border-t border-[#1d2141] bg-gradient-to-b from-[#181c38] to-[#0c0d1b] bg-no-repeat border">
-        <section className="flex rounded-md p-1">
+      <section className="flex flex-col mx-3 my-14 md:w-2/3  xl:w-2/5 2xl:w-[35%] lg:mx-auto max-w-[40rem] rounded-md gap-2 justify-center items-center border-t border-[#1d2141] bg-gradient-to-b from-[#181c38] to-[#0c0d1b] bg-no-repeat border">
+        <section className="rounded-md flex w-full justify-center p-1">
           <div className="p-2">
             <div className="flex justify-center">
               {book.src
@@ -107,7 +108,8 @@ export default function Books({ book }: BookProps) {
               }
               {isForSale
                 ? <span className="mb-2 w-full text-center rounded-md outline-1 outline text-blue-400 cursor-default">For Sale: Yes</span>
-                : <span className="mb-2 w-full text-center rounded-md outline-1 outline opacity-25 cursor-not-allowed">For Sale: No</span>}
+                : <span className="mb-2 w-full text-center rounded-md outline-1 outline opacity-25 cursor-not-allowed">For Sale: No</span>
+              }
               {isMature
                 ? <span className="mb-2 w-full text-center rounded-md outline-1 outline text-red-700 cursor-default" title="maturity rating">18+</span>
                 : <span className="mb-2 w-full text-center rounded-md outline-1 outline text-green-700 cursor-default" title="maturity rating">For all ages</span>
@@ -115,7 +117,7 @@ export default function Books({ book }: BookProps) {
             </div>
           </div>
         </section>
-        <section className="p-2 2xl:w-[90%] mb-2 flex flex-col items-center">
+        <section className="p-2 mb-2 flex flex-col items-center">
           <h2 className="mb-2 text-lg font-semibold">{book.subtitle}</h2>
           {book.description
             ? <p className=" px-2 text-sm">
@@ -129,7 +131,8 @@ export default function Books({ book }: BookProps) {
                 .replaceAll('<li>', '')
                 .replaceAll('</li>', '')
                 .replaceAll('<ul>', '')
-                .replaceAll('</ul>', '')}
+                .replaceAll('</ul>', '')
+              }
             </p>
             : <p className="text-sm">Description not available.</p>
           }
@@ -153,7 +156,6 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
 
   const res = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}?key=${process.env.NEXT_PUBLIC_KEY}`)
 
-  console.log(res.data)
   return {
     props: {
       book: {
@@ -170,6 +172,6 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         isEbook: res.data.saleInfo.isEbook,
         maturityRating: res.data.volumeInfo.maturityRating,
       }
-    }
+    },
   }
 }

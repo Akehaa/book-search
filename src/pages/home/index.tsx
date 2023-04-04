@@ -1,8 +1,9 @@
 import { BookCard } from "@/components/BookCard";
 import axios from "axios";
+import { NextSeo } from "next-seo";
 import { MagnifyingGlass } from "phosphor-react";
 import { useState } from "react";
-import Head from 'next/head'
+
 
 interface BookProps {
   id: string
@@ -43,9 +44,10 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>BookSearch</title>
-      </Head>
+      <NextSeo
+        title="BookSearch"
+        description="Search for your favorite book."
+      />
 
       <div className="flex flex-col items-center 2xl:px-4 ">
         <form className="mt-32 mb-20 flex" onSubmit={handleSubmit}>
