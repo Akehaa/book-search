@@ -98,7 +98,7 @@ export default function Books({ book }: BookProps) {
               <Link
                 href={book.infoLink}
                 target="_blank"
-                className="rounded-md mb-6 py-1 w-full hover:opacity-80 text-center  text-[#dbdff1] font-bold outline-1 outline outline-[#8486dd] bg-gradient-to-r from-[#6674c4] via-[#07aac7] to-[#6674c4] duration-200"
+                className="rounded-md mb-6 py-1 md:px-2 w-full hover:opacity-80 text-center  text-[#dbdff1] font-bold outline-1 outline outline-[#8486dd] bg-gradient-to-r from-[#6674c4] via-[#07aac7] to-[#6674c4] duration-200"
               >
                 SEE ON GOOGLE PLAY
               </Link>
