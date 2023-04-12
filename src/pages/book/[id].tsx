@@ -173,5 +173,6 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         maturityRating: res.data.volumeInfo.maturityRating,
       }
     },
+    revalidate: 60 * 60 * 4 // 4 hours
   }
 }
